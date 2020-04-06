@@ -19,7 +19,7 @@ input_name = ort_session.get_inputs()[0].name
 shape_predictor = dlib.shape_predictor('models/facial_landmarks/shape_predictor_5_face_landmarks.dat')
 fa = face_utils.facealigner.FaceAligner(shape_predictor, desiredFaceWidth=112, desiredLeftEye=(0.3, 0.3))
 
-TRAINING_BASE = "data/minh/camera"
+TRAINING_BASE = "../data/minh/camera"
 
 dirs = os.listdir(TRAINING_BASE)
 images = []
@@ -27,10 +27,15 @@ names = []
 
 ### Reading Images from Training Folder
 for label in dirs:
-    for i, raw_img in enumerate(os.listdir(os.path.join(TRAINING_BASE, label))):
-        print("{}_image_{}".format(label, raw_img))
-        gray = cv2.cv2Color(raw_img, cv2.COLOR_BGR2GRAY)
-        aligned_face = fa.align(raw_img, gray, d)
+    for i, img in enumerate(os.listdir(os.path.join(TRAINING_BASE, label))):
+        raw_img = cv2.imread(os.path.join(TRAINING_BASE, label, img))
+        print("Image shape", raw_img.shape)
+        gray = cv2.cvtColor(raw_img, cv2.COLOR_BGR2GRAY)
+        # aligned_face = cv2.resize(gray, (112,112))
+        aligned_face = gray - 127.5
+        aligned_face = aligned_face * 0.0078125
+        images.append(aligned_face)
+        names.append(label)
 
 
 ### Generating Embedding from Images
