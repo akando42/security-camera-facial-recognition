@@ -8,7 +8,7 @@ import pickle
 import onnx
 import onnxruntime as ort
 from onnx_tf.backend import prepare
-from utils import area_of, iou_of , hard_nms, predict 
+from .utils import area_of, iou_of , hard_nms, predict 
 
 class Recognize:
     def __init__(self, source=None, threshold=0.5):
@@ -22,7 +22,6 @@ class Recognize:
         shape_predictor = dlib.shape_predictor('models/facial_landmarks/shape_predictor_5_face_landmarks.dat')
         fa = face_utils.facealigner.FaceAligner(shape_predictor, desiredFaceWidth=112, desiredLeftEye=(0.3, 0.3))
     
-    def update(self):
     def execute(self):
         # load distance
         with open("embeddings/embeddings.pkl", "rb") as f:
@@ -104,16 +103,3 @@ class Recognize:
                             cv2.rectangle(frame, (x1, y2 - 20), (x2, y2), (80,18,236), cv2.FILLED)
                             font = cv2.FONT_HERSHEY_DUPLEX
                             cv2.putText(frame, text, (x1 + 6, y2 - 6), font, 0.3, (255, 255, 255), 1)
-
-                    
-
-        # Release handle to the webcam
-        video_capture.release()
-
-    def show(self):
-        cv2.imshow('Video', self.frame)
-        # Hit 'q' on the keyboard to quit!
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
-            
-    def encode(self):
