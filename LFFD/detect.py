@@ -1,13 +1,15 @@
+import os
 import time
 import mxnet as mx
 from . import predict
+from .config_farm import configuration_10_320_20L_5scales_v2 as cfg
 
 class DetectFaces():
     def __init__(self, frame = None):
         ### Loading Face Detection Models
         self.frame = frame
-        model_file_path = "models/train_10_320_20L_5scales_v2_iter_1000000.params" 
-        symbol_file_path = "symbols/symbol_10_320_20L_5scales_v2_deploy.json"
+        model_file_path = "LFFD/models/train_10_320_20L_5scales_v2_iter_1000000.params" 
+        symbol_file_path = "LFFD/symbols/symbol_10_320_20L_5scales_v2_deploy.json"
         ctx = mx.gpu(0)
 
         ### Threshold for Face Matching

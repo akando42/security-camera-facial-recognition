@@ -57,7 +57,6 @@ onnxruntime==0.5.0
 opencv-python==4.1.1.26
 opt-einsum==3.1.0
 Pillow==7.1.1
-pkg-resources==0.0.0
 protobuf==3.10.0
 pyparsing==2.4.7
 python-dateutil==2.8.1

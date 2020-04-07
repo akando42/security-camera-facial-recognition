@@ -1,6 +1,7 @@
 import concurrent.futures
 from camera.camera import VideoGet, VideoShow
 from ultralight.recognize import Recognize
+from LFFD.detect import DetectFaces
 
 sources = [
    'rtsp://QDT:QdtVtx@2020@10.61.166.15/profile3/media.smp',
@@ -13,6 +14,7 @@ MAX_PROCESSES = 3
 class Streaming():
     def __init__(self):
         self.name = "Face ID Project"
+        self.face_detector = DetectFaces()
     
     def processVideo(self, source):
         video_getter = VideoGet(source).start()

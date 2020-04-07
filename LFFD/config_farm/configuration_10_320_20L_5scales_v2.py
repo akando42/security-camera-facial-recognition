@@ -6,8 +6,8 @@ import os
 import math
 import logging
 sys.path.append('..')
-from ChasingTrainFramework_GeneralOneClassDetection import logging_GOCD
-from ChasingTrainFramework_GeneralOneClassDetection import train_GOCD
+from .ChasingTrainFramework_GeneralOneClassDetection import logging_GOCD
+from .ChasingTrainFramework_GeneralOneClassDetection import train_GOCD
 
 
 # add mxnet python path to path env if need
